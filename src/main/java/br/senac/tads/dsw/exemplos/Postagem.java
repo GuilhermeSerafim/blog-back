@@ -2,7 +2,9 @@ package br.senac.tads.dsw.exemplos;
 
 import java.time.LocalDateTime;
 
+import io.micrometer.common.lang.NonNull;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 // POJO - Plain Old Java Object
@@ -12,27 +14,16 @@ public class Postagem {
     @NotBlank
     private String autor;
     @NotBlank
-    private LocalDateTime dataAtual;
-    @NotBlank
     @Size(min = 10)
     private String postagem;
-    @NotBlank
-    private boolean ehPostado;
+    @NotNull
+    private LocalDateTime dataAtual;
 
-    public Postagem(String titulo, String autor, LocalDateTime dataAtual, String postagem, boolean ehPostado) {
+    public Postagem(String titulo, String autor, LocalDateTime dataAtual, String postagem) {
         this.titulo = titulo;
         this.autor = autor;
         this.dataAtual = dataAtual;
         this.postagem = postagem;
-        this.ehPostado = ehPostado;
-    }
-
-    public boolean isEhPostado() {
-        return ehPostado;
-    }
-
-    public void setEhPostado(boolean ehPostado) {
-        this.ehPostado = ehPostado;
     }
 
     public String getTitulo() {
