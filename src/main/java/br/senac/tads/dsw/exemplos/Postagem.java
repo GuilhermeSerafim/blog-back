@@ -1,60 +1,55 @@
 package br.senac.tads.dsw.exemplos;
 
-import java.time.LocalDateTime;
-
-import io.micrometer.common.lang.NonNull;
+import java.time.LocalDate;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-// POJO - Plain Old Java Object
+@Entity
 public class Postagem {
-    @NotBlank
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotBlank(message = "O título é obrigatório")
     private String titulo;
-    @NotBlank
+
+    @NotBlank(message = "O autor é obrigatório")
     private String autor;
-    @NotBlank
-    @Size(min = 10)
-    private String postagem;
-    @NotNull
-    private LocalDateTime dataAtual;
 
-    public Postagem(String titulo, String autor, LocalDateTime dataAtual, String postagem) {
+    @NotBlank(message = "O texto é obrigatório")
+    @Size(min = 10, message = "O texto deve ter no mínimo 10 caracteres") 
+    private String texto;
+    
+    @NotNull(message = "A data é obrigatória")
+    private LocalDate dataPublicacao; 
+
+    public Postagem() {}
+
+    public Postagem(String titulo, String autor, LocalDate dataPublicacao, String texto) {
         this.titulo = titulo;
         this.autor = autor;
-        this.dataAtual = dataAtual;
-        this.postagem = postagem;
+        this.dataPublicacao = dataPublicacao;
+        this.texto = texto;
     }
 
-    public String getTitulo() {
-        return titulo;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
+    public String getTitulo() { return titulo; }
+    public void setTitulo(String titulo) { this.titulo = titulo; }
 
-    public String getAutor() {
-        return autor;
-    }
+    public String getAutor() { return autor; }
+    public void setAutor(String autor) { this.autor = autor; }
 
-    public void setAutor(String autor) {
-        this.autor = autor;
-    }
+    public String getTexto() { return texto; }
+    public void setTexto(String texto) { this.texto = texto; }
 
-    public LocalDateTime getDataAtual() {
-        return dataAtual;
-    }
-
-    public void setDataAtual(LocalDateTime dataAtual) {
-        this.dataAtual = dataAtual;
-    }
-
-    public String getPostagem() {
-        return postagem;
-    }
-
-    public void setPostagem(String postagem) {
-        this.postagem = postagem;
-    }
+    public LocalDate getDataPublicacao() { return dataPublicacao; }
+    public void setDataPublicacao(LocalDate dataPublicacao) { this.dataPublicacao = dataPublicacao; }
 }
